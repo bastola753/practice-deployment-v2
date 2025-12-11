@@ -19,8 +19,8 @@ def predict():
 
 @app.route("/api/predict", methods=["POST"])
 def api_predict():
-    email = request.get_json(force=True)
-    tokenized_email = cv.transform([email])
+    data = request.get_json(force=True)
+    tokenized_email = cv.transform([data['email-content']])
     prediction = clf.predict(tokenized_email)
     prediction = 1 if prediction==1 else -1
     return jsonify({prediction: prediction})
